@@ -18,16 +18,18 @@ def get_mail():
     resp_code, mails = mail.search(None, 'ALL')
 
 # get the email
-    for mail_id in mails[0].decode().split()[-2:]:
-        resp_code, mail_data = mail.fetch(mail_id, '(RFC822)')
-        message = email.message_from_bytes(mail_data[0][1])
-
-# get body of message
-    with open("command.txt", "w")as command_file:
-        for payload in message.get_payload():
-            command_file.write(payload.get_payload())
-        command_file.close()
-        edit()
+    try:
+        for mail_id in mails[0].decode().split()[-2:]:
+            resp_code, mail_data = mail.fetch(mail_id, '(RFC822)')
+            message = email.message_from_bytes(mail_data[0][1])
+    # get body of message
+        with open("command.txt", "w")as command_file:
+            for payload in message.get_payload():
+                command_file.write(payload.get_payload())
+            command_file.close()  
+            edit()
+    except:
+        wait()
 
 def edit():
     end_msg = "parsekillhere = 0\n" # this message goes at end of script in email
