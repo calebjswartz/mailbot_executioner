@@ -13,3 +13,4 @@ As is, the program automatically deletes the drafted email from which it reads t
 
 The timer constant must specify a time in seconds to wait before executing the get_mail function to check the drafts folder for commands.
 
+I have also included two python files ("encode.py" and "exec.py"). The first file encodes a program in a simple attempt to hide the content from static analysis before execution. A program is included as a string in exec.py and will be decoded/executed in memory when it is run. The program is encoded from an input text file and output to another text file.
